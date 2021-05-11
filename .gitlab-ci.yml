@@ -11,7 +11,7 @@ prepare:stable:
   script:
     - docker pull dockerwest/nginx:stable
   only:
-    - master
+    - main
 
 prepare:mainline:
   stage: prepare
@@ -20,7 +20,7 @@ prepare:mainline:
   script:
     - docker pull dockerwest/nginx:mainline
   only:
-    - master
+    - main
 
 build:stable:
   stage: build
@@ -29,7 +29,7 @@ build:stable:
   script:
     - cd stable; ./build.sh
   only:
-    - master
+    - main
 
 build:mainline:
   stage: build
@@ -38,7 +38,7 @@ build:mainline:
   script:
     - cd mainline; ./build.sh
   only:
-    - master
+    - main
 
 release:stable:
   stage: release
@@ -47,7 +47,7 @@ release:stable:
   script:
     - docker push dockerwest/nginx-pimcore10:stable
   only:
-    - master
+    - main
 
 release:mainline:
   stage: release
@@ -56,4 +56,4 @@ release:mainline:
   script:
     - docker push dockerwest/nginx-pimcore10:mainline
   only:
-    - master
+    - main
