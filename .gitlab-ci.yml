@@ -1,0 +1,59 @@
+---
+stages:
+  - prepare
+  - build
+  - release
+
+prepare:stable:
+  stage: prepare
+  tags:
+    - dockerwest
+  script:
+    - docker pull dockerwest/nginx:stable
+  only:
+    - master
+
+prepare:mainline:
+  stage: prepare
+  tags:
+    - dockerwest
+  script:
+    - docker pull dockerwest/nginx:mainline
+  only:
+    - master
+
+build:stable:
+  stage: build
+  tags:
+    - dockerwest
+  script:
+    - cd stable; ./build.sh
+  only:
+    - master
+
+build:mainline:
+  stage: build
+  tags:
+    - dockerwest
+  script:
+    - cd mainline; ./build.sh
+  only:
+    - master
+
+release:stable:
+  stage: release
+  tags:
+    - dockerwest
+  script:
+    - docker push dockerwest/nginx-pimcore10:stable
+  only:
+    - master
+
+release:mainline:
+  stage: release
+  tags:
+    - dockerwest
+  script:
+    - docker push dockerwest/nginx-pimcore10:mainline
+  only:
+    - master
